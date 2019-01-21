@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.TestUserMapper" >
+    <resultMap id="BaseResultMap" type="com.example.demo.entity.TestUser" >
+        <id column="user_id" property="userId" jdbcType="INTEGER" />
+        <result column="user_name" property="userName" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="sex" property="sex" jdbcType="VARCHAR"/>
+        <result column="invalid" property="invalid" jdbcType="INTEGER" />
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+       user_id,user_name,password,email,sex,invalid
+    </sql>
+
+    <select id="queryAllUser" resultMap="BaseResultMap"  >
+       SELECT 
+       <include refid="Base_Column_List" />
+	   FROM test_user
+    </select>
+
+    <insert id="saveUser" parameterType="com.example.demo.entity.TestUser" keyColumn="user_id" keyProperty="userId" useGeneratedKeys="true">
+      insert into test_user
+      <trim prefix="("  suffix=")" suffixOverrides=",">
+         <if test="userName != null">
+              user_name,
+         </if>
+         <if test="password != null">
+             password,
+         </if>
+         <if test="email != null">
+             email,
+         </if>
+         <if test="sex != null">
+             sex,
+         </if>
+         <if test="invalid != null">
+             invalid,
+         </if>
+      </trim>
+      <trim prefix="value(" suffix=")" suffixOverrides=",">
+          <if test="userName != null">
+              #{userName},
+          </if>
+          <if test="password != null">
+              #{password},
+          </if>
+          <if test="email != null">
+              #{email},
+          </if>
+          <if test="sex != null">
+              #{sex},
+          </if>
+          <if test="invalid != null">
+              #{invalid},
+          </if>
+      </trim>
+    </insert>
+
+    <select id="queryByUserName" parameterType="String" resultType="com.example.demo.entity.TestUser">
+        select <include refid="Base_Column_List"></include>
+        from test_user
+        where user_name = #{userName}
+          and invalid = 0
+    </select>
+
+</mapper>
