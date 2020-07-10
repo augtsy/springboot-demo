@@ -1,6 +1,8 @@
 package com.example.demo.entity;
 
-public class TestUser {
+import java.io.Serializable;
+
+public class TestUser implements Serializable {
 
     private Integer userId;// 用户主键
     private String userName;// 用户名

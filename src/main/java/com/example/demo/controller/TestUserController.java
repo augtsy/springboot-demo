@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@RequestMapping("testUser")
 public class TestUserController {
 
     @Autowired
@@ -18,8 +19,13 @@ public class TestUserController {
 
     @RequestMapping("/all")
     public JsonResult queryAllUser() {
-        List<TestUser> testUsers = testUserService.queryAllUser();
-        return new JsonResult(testUsers);
+        try {
+            List<TestUser> testUsers = testUserService.queryAllUser();
+            return new JsonResult(testUsers);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @RequestMapping("/save")

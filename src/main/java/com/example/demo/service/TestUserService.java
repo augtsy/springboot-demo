@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface TestUserService {
 
-    List<TestUser> queryAllUser();
+    List<TestUser> queryAllUser()throws Exception;
 
     Integer saveUser(TestUser testUser) throws Exception;
 
