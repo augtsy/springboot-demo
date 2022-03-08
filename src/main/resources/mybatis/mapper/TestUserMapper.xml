@@ -11,19 +11,18 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-       user_id,user_name,password,email,sex,invalid
+        user_id
+        ,user_name,password,email,sex,invalid
     </sql>
 
-    <select id="queryAllUser" resultMap="BaseResultMap">
-        SELECT
-        <include refid="Base_Column_List"/>
-        FROM test_user
-    </select>
-
-    <insert id="saveUser" parameterType="TestUser" keyColumn="user_id" keyProperty="userId"
+    <insert id="saveUserToCopy" parameterType="com.example.demo.entity.TestUser" keyColumn="user_id"
+            keyProperty="userId"
             useGeneratedKeys="true">
-        insert into test_user
+        insert into test_user_copy1
         <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
             <if test="userName != null">
                 user_name,
             </if>
@@ -39,8 +38,12 @@
             <if test="invalid != null">
                 invalid,
             </if>
+            createTime,
         </trim>
         <trim prefix="value(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId},
+            </if>
             <if test="userName != null">
                 #{userName},
             </if>
@@ -56,10 +59,68 @@
             <if test="invalid != null">
                 #{invalid},
             </if>
+            now(),
         </trim>
     </insert>
 
-    <select id="queryByUserName" parameterType="String" resultType="TestUser">
+    <select id="queryAllUser" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM test_user
+    </select>
+
+    <insert id="saveUser" parameterType="com.example.demo.entity.TestUser" keyColumn="user_id" keyProperty="userId"
+            useGeneratedKeys="true">
+        insert into test_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="invalid != null">
+                invalid,
+            </if>
+            <if test="createTime != null">
+                createTime,
+            </if>
+        </trim>
+        <trim prefix="value(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="userName != null">
+                #{userName},
+            </if>
+            <if test="password != null">
+                #{password},
+            </if>
+            <if test="email != null">
+                #{email},
+            </if>
+            <if test="sex != null">
+                #{sex},
+            </if>
+            <if test="invalid != null">
+                #{invalid},
+            </if>
+            <if test="createTime != null">
+                now(),
+            </if>
+        </trim>
+    </insert>
+
+    <select id="queryByUserName" parameterType="String" resultType="com.example.demo.entity.TestUser">
         select
         <include refid="Base_Column_List"></include>
         from test_user

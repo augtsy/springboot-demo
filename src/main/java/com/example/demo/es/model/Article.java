@@ -2,6 +2,9 @@ package com.example.demo.es.model;
 
 import lombok.Data;
 
+/**
+ * todo
+ */
 @Data
 public class Article {
     private Long id;//l 文章 id

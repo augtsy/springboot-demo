@@ -1,7 +1,11 @@
 package com.example.demo.entity;
 
-import java.io.Serializable;
+import lombok.Data;
 
+import java.io.Serializable;
+import java.util.Date;
+
+@Data
 public class TestUser implements Serializable {
 
     private Integer userId;// 用户主键
@@ -10,6 +14,8 @@ public class TestUser implements Serializable {
     private String email;
     private String sex;
     private Integer invalid;
+    private Date createTime;
+    private Date updateTime;
 
     public Integer getUserId() {
         return userId;

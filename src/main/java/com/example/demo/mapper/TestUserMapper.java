@@ -4,6 +4,7 @@ import com.example.demo.entity.TestUser;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
 @Repository
 public interface TestUserMapper {
 
@@ -14,4 +15,5 @@ public interface TestUserMapper {
     List<TestUser> queryByUserName(String userName);
 
 
+    Integer saveUserToCopy(TestUser testUser);
 }
