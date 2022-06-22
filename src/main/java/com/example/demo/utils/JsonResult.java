@@ -10,13 +10,13 @@ public class JsonResult {
 
     }
 
-    public JsonResult(Object data){
+    public JsonResult(Object data) {
         this.message = "true";
         this.status = 0;
         this.data = data;
     }
 
-    public JsonResult(String message){
+    public JsonResult(String message) {
         this.message = "false";
         this.status = 1;
     }

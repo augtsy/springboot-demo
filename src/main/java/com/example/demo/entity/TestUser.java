@@ -1,10 +1,17 @@
 package com.example.demo.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Data
 public class TestUser implements Serializable {
 
@@ -16,6 +23,8 @@ public class TestUser implements Serializable {
     private Integer invalid;
     private Date createTime;
     private Date updateTime;
+
+    private List<TestUser> users;
 
     public Integer getUserId() {
         return userId;

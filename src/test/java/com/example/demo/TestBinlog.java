@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.demo.entity.TestUser;
 import com.example.demo.mapper.TestUserMapper;
 import com.example.demo.service.TestUserService;
+import com.example.demo.service.impl.TestUserServiceImpl;
 import com.github.shyiko.mysql.binlog.BinaryLogClient;
 import com.github.shyiko.mysql.binlog.event.*;
 import com.github.shyiko.mysql.binlog.event.deserialization.EventDeserializer;
@@ -31,7 +32,7 @@ import java.util.stream.Stream;
 public class TestBinlog {
 
     @Autowired
-    private TestUserMapper testUserService;
+    private TestUserMapper testUserMapper;
 
     @Test
     public void test() throws IOException {
@@ -78,7 +79,7 @@ public class TestBinlog {
             testUser.setSex((String) objects.get(4));
             testUser.setInvalid((Integer) objects.get(5));
             try {
-                Integer integer = testUserService.saveUserToCopy(testUser);
+                Integer integer = testUserMapper.saveUserToCopy(testUser);
             } catch (Exception e) {
                 e.printStackTrace();
             }

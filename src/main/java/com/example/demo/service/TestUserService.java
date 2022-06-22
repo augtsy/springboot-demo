@@ -10,4 +10,5 @@ public interface TestUserService {
 
     Integer saveUser(TestUser testUser) throws Exception;
 
+    void export();
 }
